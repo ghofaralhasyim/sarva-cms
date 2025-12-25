@@ -228,7 +228,7 @@ onMounted(async () => {
                 <h3 class="font-medium mb-2">Room</h3>
                 <div class="flex gap-3">
                   <img
-                    :src="`/img/${b.room.id}.jpg`"
+                    :src="`/img/villas/${b.room.id}.jpg`"
                     :alt="b.room.name"
                     class="w-20 h-20 object-cover rounded border border-gray-200 shrink-0"
                   />
