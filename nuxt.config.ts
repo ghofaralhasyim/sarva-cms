@@ -15,6 +15,12 @@ export default defineNuxtConfig({
     ],
   },
 
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: '',
+    },
+  },
+
   googleFonts: {
     families: {
       'Lato': [300, 400, 700],

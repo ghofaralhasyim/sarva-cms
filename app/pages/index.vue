@@ -48,10 +48,10 @@ async function handleLogIn() {
     await useCsFetch<LoginResponse>("/admin/login", {
       method: "POST",
       body: formData,
-      onResponse({ response }) {
+      onResponse({ response }: any) {
         if (response.status != 200) return;
         authStore.token = response._data.data.token;
-        router.push("/articles");
+        router.push("/bookings");
       },
     });
   } catch (err) {

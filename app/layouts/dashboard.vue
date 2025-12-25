@@ -34,12 +34,12 @@ onUnmounted(() => {
     </header>
 
     <!-- GRID LAYOUT -->
-    <div class="min-h-dvh grid grid-cols-1 md:grid-cols-[11.5rem_1fr]">
+    <div class="h-dvh grid grid-cols-1 md:grid-cols-[11.5rem_1fr] overflow-hidden">
       <!-- Sidebar column -->
       <Sidebar :isOpen="sidebarOpen" @close="sidebarOpen = false" />
 
       <!-- Main column -->
-      <main class="font-montserrat pt-14 md:pt-0">
+      <main class="font-montserrat pt-14 md:pt-0 overflow-x-auto">
         <slot />
       </main>
     </div>
