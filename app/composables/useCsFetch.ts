@@ -9,7 +9,7 @@ export function useCsFetch<T = any>(
     const token = authStore.token
   
     const defaults: FetchOptions = {
-        baseURL: config.public.apiBaseUrl,
+        baseURL: config.public.apiBaseUrl || 'http://103.127.136.60:8080/api/v1',
         ...options,
     }
 

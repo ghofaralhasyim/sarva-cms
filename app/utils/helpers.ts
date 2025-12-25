@@ -1,5 +1,4 @@
-import { ZodError, ZodObject } from "zod";
-import type {ZodSchema} from "zod"
+import { ZodError, ZodObject, type ZodRawShape } from "zod"
 
   /**
  * Utility function to debounce a given function.
@@ -21,36 +20,28 @@ import type {ZodSchema} from "zod"
 };
 
 export const validateField = debounce(
-    <T extends Record<string, any>>(
-      field: keyof T,
-      formData: T,
-      schema: ZodSchema<T>,
-      errors: Partial<Record<keyof T, string>>
-    ) => {
-      try {
-        if (schema instanceof ZodObject) {
-          const fieldPick = { [field]: true } as Record<string, true>;
-  
-          schema
-            .pick(fieldPick)
-            .parse({
-              [field]: formData[field],
-            });
-  
-          errors[field] = '';
-        } else {
-          throw new Error("The provided schema does not support 'pick' method.");
-        }
-      } catch (err) {
-        if (err instanceof ZodError) {
-          errors[field] = err.issues[0]?.message ?? "Invalid value";
-        } else {
-          console.error(err);
-        }
+  <Shape extends ZodRawShape, T extends Record<string, any>>(
+    field: keyof T,
+    formData: T,
+    schema: ZodObject<Shape>,
+    errors: Partial<Record<keyof T, string>>
+  ) => {
+    try {
+      schema
+        .pick({ [field]: true } as Record<string, true>)
+        .parse({ [field]: formData[field] })
+
+      errors[field] = ""
+    } catch (err) {
+      if (err instanceof ZodError) {
+        errors[field] = err.issues?.[0]?.message ?? "Invalid value"
+      } else {
+        console.error(err)
       }
-    },
-    300 
-  );
+    }
+  },
+  300
+)
 
   export const formatDate = (dateString: string | Date, format: string): string => {
     const date = new Date(dateString);

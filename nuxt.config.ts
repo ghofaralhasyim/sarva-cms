@@ -9,15 +9,18 @@ export default defineNuxtConfig({
     '~/assets/css/main.css'
   ],
 
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: '',
+    },
+  },
+
   vite: {
     plugins: [
       tailwindcss(),
     ],
-  },
-
-  runtimeConfig: {
-    public: {
-      apiBaseUrl: '',
+     ssr: {
+      noExternal: ["zod"],
     },
   },
 
@@ -35,7 +38,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@vueuse/nuxt',
     '@pinia/nuxt',
-    'pinia-plugin-persistedstate/nuxt'
+    'pinia-plugin-persistedstate/nuxt',
   ],
 
   piniaPluginPersistedstate: {

@@ -54,15 +54,14 @@ async function handleLogIn() {
         router.push("/bookings");
       },
     });
-  } catch (err) {
+  } catch (err: any) {
     if (err instanceof ZodError) {
       err.issues.forEach((error: any) => {
         const field = error.path[0] as keyof FormLoginData;
         errors[field] = error.message;
       });
     } else {
-      let msg = getErrorFetchMessage(err);
-      toastStore.addToast(`Log in error: ${msg}`, "error", 5000);
+      toastStore.addToast(`Log in error: ${err.response._data.error}`, "error", 5000);
     }
   }
 
